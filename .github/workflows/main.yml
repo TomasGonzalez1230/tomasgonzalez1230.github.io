@@ -3,20 +3,18 @@ name: Deploy to Surge
 on:
   push:
     branches:
-      - main
+      - main # Asegúrate de que la rama coincide con tu repositorio
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Build and Deploy
-        run: |
-          # Configurar Surge.sh
-          npm install --global surge
-          surge token 25bb828415839528ba56c9959db1c708 # Reemplazar <SURGE_API_KEY> con la API Key de Surge de cada estudiante
+      - name: Install Surge
+        run: npm install -g surge
 
-          # Desplegar en Surge.sh
-          surge --project ./ --domain tomas123.surge.sh # Reemplazar <SURGE_SUBDOMAIN> con un subdominio único para cada estudiante
+      - name: Deploy to Surge
+        run: surge ./ tomas123.surge.sh --token ${{ secrets.SURGE_TOKEN }}
