@@ -1,1 +1,11 @@
-
+name: Alerta de GitHub Actions
+on:
+  push:
+    branches:
+      - main
+jobs:
+  alerta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Imprimir mensaje
+        run: echo "¡Se ha realizado un push a main!"
